@@ -13,7 +13,7 @@ import dataRetrieval
 
 root = tkinter.Tk()
 root.tk_setPalette(background = "black")
-root.geometry('480x480+0+0')
+root.geometry('480x480')
 root.title("Martian Rover Graph")
 
 class menu:
@@ -108,11 +108,11 @@ class menu:
 
             self.xAxLabel["text"] = str(sol) + "\t" + str(sol + 1) + "\t" + str(sol + 2) + "\t " + str(sol + 3) + "\t" + str(sol + 4) + "\t" + str(sol + 5)
 
-            solOneLine = self.graph.create_line(11, 250 - solOneData.numb_pictures() * 6.8, 84.8, 250 - solTwoData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4)
-            solTwoLine = self.graph.create_line(84.8, 250 - solTwoData.numb_pictures() * 6.8, 158.6, 250 - solThreeData.numb_pictures() * 6.8, fill = "red", width = 2, activewidth = 4)
-            solThreeLine = self.graph.create_line(158.6, 250 - solThreeData.numb_pictures() * 6.8, 232.4, 250 - solFourData.numb_pictures() * 6.8, fill = "orange", width = 2, activewidth = 4)
-            solFourLine = self.graph.create_line(232.4,250 - solFourData.numb_pictures() * 6.8, 306.2, 250 - solFiveData.numb_pictures() * 6.8, fill = "yellow", width = 2, activewidth = 4)
-            solFiveLine = self.graph.create_line(306.2,250 - solFiveData.numb_pictures() * 6.8, 380, 250 - solSixData.numb_pictures() * 6.8, fill = "purple", width = 2, activewidth = 4)
+            solOneLine = self.graph.create_line(11, 250 - solOneData.numb_pictures() * 6.8, 84.8, 250 - solTwoData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
+            solTwoLine = self.graph.create_line(84.8, 250 - solTwoData.numb_pictures() * 6.8, 158.6, 250 - solThreeData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
+            solThreeLine = self.graph.create_line(158.6, 250 - solThreeData.numb_pictures() * 6.8, 232.4, 250 - solFourData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
+            solFourLine = self.graph.create_line(232.4,250 - solFourData.numb_pictures() * 6.8, 306.2, 250 - solFiveData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
+            solFiveLine = self.graph.create_line(306.2,250 - solFiveData.numb_pictures() * 6.8, 380, 250 - solSixData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
 
     def __init__(self, master):
         """
