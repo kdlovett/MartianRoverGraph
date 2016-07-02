@@ -16,6 +16,8 @@ root.tk_setPalette(background = "black")
 root.geometry('480x480')
 root.title("Martian Rover Graph")
 
+#test
+
 class menu:
 
     def print_sol(self, event):
