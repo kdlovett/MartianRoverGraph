@@ -4,6 +4,7 @@ Personal project. Displays some basic information about pictures taken by the Ma
 
 Attribution:
 Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter. Thanks!
+Utilizes Nasa's open source "Mars Rover Photos" data.
 """
 
 import urllib.request
