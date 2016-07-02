@@ -17,6 +17,7 @@ root.geometry('480x480')
 root.title("Martian Rover Graph")
 
 #test
+print("hello")
 
 class menu:
 
