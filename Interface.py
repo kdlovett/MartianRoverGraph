@@ -2,6 +2,9 @@ __author__ = 'keithlovett'
 """
 Personal project. Displays some basic information about pictures taken by the Mars rovers.
 
+Good test parameters:
+Sol 580, Curiosity, FHAZ
+
 Attribution:
 Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter. Thanks!
 Utilizes Nasa's open source "Mars Rover Photos" data.
@@ -15,9 +18,6 @@ root = tkinter.Tk()
 root.tk_setPalette(background = "black")
 root.geometry('480x480')
 root.title("Martian Rover Graph")
-
-#test
-print("hello")
 
 class menu:
 
@@ -116,6 +116,16 @@ class menu:
             solThreeLine = self.graph.create_line(158.6, 250 - solThreeData.numb_pictures() * 6.8, 232.4, 250 - solFourData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
             solFourLine = self.graph.create_line(232.4,250 - solFourData.numb_pictures() * 6.8, 306.2, 250 - solFiveData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
             solFiveLine = self.graph.create_line(306.2,250 - solFiveData.numb_pictures() * 6.8, 380, 250 - solSixData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
+
+            self.graph.tag_bind(solOneLine, '<Enter>', self.info_display)
+            self.graph.tag_bind(solTwoLine, '<Enter>', self.info_display)
+            self.graph.tag_bind(solThreeLine, '<Enter>', self.info_display)
+            self.graph.tag_bind(solFourLine, '<Enter>', self.info_display)
+            self.graph.tag_bind(solFiveLine, '<Enter>', self.info_display)
+
+    def info_display(self, event):
+        #Work here
+        print("This will eventually display info in the window about the line currently observed.")
 
     def __init__(self, master):
         """
