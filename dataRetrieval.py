@@ -3,7 +3,9 @@ __author__ = 'keithlovett'
 Personal project. Displays some basic information about pictures taken by the Mars rovers.
 
 Attribution:
-Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter. Thanks!
+Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter.
+Also found the eff-bot Python documentation on more minute aspects of tkinter quite helpful.
+Thanks!
 Utilizes Nasa's open source "Mars Rover Photos" data.
 """
 

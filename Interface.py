@@ -6,13 +6,17 @@ Good test parameters:
 Sol 580, Curiosity, FHAZ
 
 Attribution:
-Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter. Thanks!
+Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter.
+Also found the eff-bot Python documentation on more minute aspects of tkinter quite helpful.
+Thanks!
 Utilizes Nasa's open source "Mars Rover Photos" data.
 """
 
 import tkinter
 
 import dataRetrieval
+
+import copy
 
 root = tkinter.Tk()
 root.tk_setPalette(background = "black")
@@ -102,30 +106,92 @@ class menu:
         sol = int(self.strSol.get())
 
         if (sol >= 0 and self.rover != "" and self.camLabel["fg"] == "green"):
-            solOneData = dataRetrieval.retrieve(str(sol), self.rover.lower(), str(self.strCam.get()).lower())
-            solTwoData = dataRetrieval.retrieve(str(sol + 1), self.rover.lower(), str(self.strCam.get()).lower())
-            solThreeData = dataRetrieval.retrieve(str(sol + 2), self.rover.lower(), str(self.strCam.get()).lower())
-            solFourData = dataRetrieval.retrieve(str(sol + 3), self.rover.lower(), str(self.strCam.get()).lower())
-            solFiveData = dataRetrieval.retrieve(str(sol + 4), self.rover.lower(), str(self.strCam.get()).lower())
-            solSixData = dataRetrieval.retrieve(str(sol + 5), self.rover.lower(), str(self.strCam.get()).lower())
+            #Retrieves data for the appropriate sol
+            solOneGet = dataRetrieval.retrieve(str(sol), self.rover.lower(), str(self.strCam.get()).lower())
+            solTwoGet = dataRetrieval.retrieve(str(sol + 1), self.rover.lower(), str(self.strCam.get()).lower())
+            solThreeGet = dataRetrieval.retrieve(str(sol + 2), self.rover.lower(), str(self.strCam.get()).lower())
+            solFourGet = dataRetrieval.retrieve(str(sol + 3), self.rover.lower(), str(self.strCam.get()).lower())
+            solFiveGet = dataRetrieval.retrieve(str(sol + 4), self.rover.lower(), str(self.strCam.get()).lower())
+            solSixGet = dataRetrieval.retrieve(str(sol + 5), self.rover.lower(), str(self.strCam.get()).lower())
 
+            #Creates deep copies of sol data in order to avoid making an unnecessary number of http requests.
+            self.solOneData = copy.deepcopy(solOneGet)
+            self.solTwoData = copy.deepcopy(solTwoGet)
+            self.solThreeData = copy.deepcopy(solThreeGet)
+            self.solFourData = copy.deepcopy(solFourGet)
+            self.solFiveData = copy.deepcopy(solFiveGet)
+            self.solSixData = copy.deepcopy(solSixGet)
+
+            #Creates x label and fills with appropriate sol numbers
             self.xAxLabel["text"] = str(sol) + "\t" + str(sol + 1) + "\t" + str(sol + 2) + "\t " + str(sol + 3) + "\t" + str(sol + 4) + "\t" + str(sol + 5)
 
-            solOneLine = self.graph.create_line(11, 250 - solOneData.numb_pictures() * 6.8, 84.8, 250 - solTwoData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
-            solTwoLine = self.graph.create_line(84.8, 250 - solTwoData.numb_pictures() * 6.8, 158.6, 250 - solThreeData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
-            solThreeLine = self.graph.create_line(158.6, 250 - solThreeData.numb_pictures() * 6.8, 232.4, 250 - solFourData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
-            solFourLine = self.graph.create_line(232.4,250 - solFourData.numb_pictures() * 6.8, 306.2, 250 - solFiveData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
-            solFiveLine = self.graph.create_line(306.2,250 - solFiveData.numb_pictures() * 6.8, 380, 250 - solSixData.numb_pictures() * 6.8, fill = "green", width = 2, activewidth = 4, activefill = "blue")
+            #Creates five lines spanning the length of six selected sols.
+            solOneLine = self.graph.create_line(11, 250 - self.solOneData.numb_pictures() * 6.8, 84.8,
+                                                250 - self.solTwoData.numb_pictures() * 6.8, fill="green", width=2)
+            solTwoLine = self.graph.create_line(84.8, 250 - self.solTwoData.numb_pictures() * 6.8, 158.6,
+                                                250 - self.solThreeData.numb_pictures() * 6.8, fill="green", width=2)
+            solThreeLine = self.graph.create_line(158.6, 250 - self.solThreeData.numb_pictures() * 6.8, 232.4,
+                                                  250 - self.solFourData.numb_pictures() * 6.8, fill="green", width=2)
+            solFourLine = self.graph.create_line(232.4,250 - self.solFourData.numb_pictures() * 6.8, 306.2,
+                                                 250 - self.solFiveData.numb_pictures() * 6.8, fill="green", width=2)
+            solFiveLine = self.graph.create_line(306.2,250 - self.solFiveData.numb_pictures() * 6.8, 380,
+                                                 250 - self.solSixData.numb_pictures() * 6.8, fill="green", width=2)
 
-            self.graph.tag_bind(solOneLine, '<Enter>', self.info_display)
-            self.graph.tag_bind(solTwoLine, '<Enter>', self.info_display)
-            self.graph.tag_bind(solThreeLine, '<Enter>', self.info_display)
-            self.graph.tag_bind(solFourLine, '<Enter>', self.info_display)
-            self.graph.tag_bind(solFiveLine, '<Enter>', self.info_display)
+            #Creates six dots at the corresponding selected sols' locations.
+            solOneDot = self.graph.create_oval(8, 247 - self.solOneData.numb_pictures() * 6.8, 14,
+                                               253 - self.solOneData.numb_pictures() * 6.8, fill="green",
+                                               activefill="blue", outline = "green", activewidth = 2)
+            solTwoDot = self.graph.create_oval(81.8, 247 - self.solTwoData.numb_pictures() * 6.8, 87.8,
+                                               253 - self.solTwoData.numb_pictures() * 6.8, fill="green",
+                                               activefill="blue", outline="green", activewidth = 2)
+            solThreeDot = self.graph.create_oval(155.6, 247 - self.solThreeData.numb_pictures() * 6.8, 161.6,
+                                               253 - self.solThreeData.numb_pictures() * 6.8, fill="green",
+                                               activefill="blue", outline="green", activewidth = 2)
+            solFourDot = self.graph.create_oval(229.4, 247 - self.solFourData.numb_pictures() * 6.8, 235.4,
+                                               253 - self.solFourData.numb_pictures() * 6.8, fill="green",
+                                               activefill="blue", outline="green", activewidth = 2)
+            solFiveDot = self.graph.create_oval(303.2, 247 - self.solFiveData.numb_pictures() * 6.8, 309.2,
+                                               253 - self.solFiveData.numb_pictures() * 6.8, fill="green",
+                                               activefill="blue", outline="green", activewidth = 2)
+            solSixDot = self.graph.create_oval(377, 247 - self.solSixData.numb_pictures() * 6.8, 383,
+                                               253 - self.solSixData.numb_pictures() * 6.8, fill="green",
+                                               activefill="blue", outline="green", activewidth = 2)
 
-    def info_display(self, event):
-        #Work here
-        print("This will eventually display info in the window about the line currently observed.")
+            #Binds each sol's dot on the graph to the mouse entering the line. Performs data assign function to assign
+            #appropriate data to appropriate dot.
+            self.graph.tag_bind(solOneDot, '<Enter>', self.data_assign)
+            self.graph.tag_bind(solTwoDot, '<Enter>', self.data_assign)
+            self.graph.tag_bind(solThreeDot, '<Enter>', self.data_assign)
+            self.graph.tag_bind(solFourDot, '<Enter>', self.data_assign)
+            self.graph.tag_bind(solFiveDot, '<Enter>', self.data_assign)
+            self.graph.tag_bind(solSixDot, '<Enter>', self.data_assign)
+
+    def data_assign(self, event):
+        """
+        Upon entering a dot on the graph, checks if the mouse coordinates x value is less than or equal to the maximum
+        x value of the oval representing the dot. If so, display the info for the corresponding sol's data.
+        """
+
+        if (event.x <= 14):
+            self.display_info(self.solOneData)
+        elif (event.x <= 87.8):
+            self.display_info(self.solTwoData)
+        elif (event.x <= 161.6):
+            self.display_info(self.solThreeData)
+        elif (event.x <= 235.4):
+            self.display_info(self.solFourData)
+        elif (event.x <= 309.2):
+            self.display_info(self.solFiveData)
+        else:
+            self.display_info(self.solSixData)
+
+    def display_info(self, solData):
+        """
+        Will continue working on here.
+        """
+
+        print("hello")
+
 
     def __init__(self, master):
         """
