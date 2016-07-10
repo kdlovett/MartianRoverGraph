@@ -13,9 +13,7 @@ Utilizes Nasa's open source "Mars Rover Photos" data.
 """
 
 import tkinter
-
 import dataRetrieval
-
 import copy
 
 root = tkinter.Tk()
@@ -172,17 +170,17 @@ class menu:
         x value of the oval representing the dot. If so, display the info for the corresponding sol's data.
         """
 
-        if (event.x <= 14):
+        if (event.x <= 17 and event.x > 5):
             self.display_info(self.solOneData)
-        elif (event.x <= 87.8):
+        elif (event.x <= 90.8 and event.x > 78.8):
             self.display_info(self.solTwoData)
-        elif (event.x <= 161.6):
+        elif (event.x <= 164.6 and event.x > 152.6):
             self.display_info(self.solThreeData)
-        elif (event.x <= 235.4):
+        elif (event.x <= 234.4 and event.x > 230.4):
             self.display_info(self.solFourData)
-        elif (event.x <= 309.2):
+        elif (event.x <= 306.2 and event.x > 307.2):
             self.display_info(self.solFiveData)
-        else:
+        elif (event.x <= 380 and event.x > 374):
             self.display_info(self.solSixData)
 
     def display_info(self, solData):
@@ -190,7 +188,7 @@ class menu:
         Will continue working on here.
         """
 
-        print("hello")
+        print(solData.numb_pictures())
 
 
     def __init__(self, master):
