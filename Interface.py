@@ -71,7 +71,7 @@ class menu:
         self.roverLabel["fg"] = "purple"
         self.rover = "Curiosity"
         self.roverLabel["text"] = self.rover
-        self.details["text"] = "FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM"
+        self.details["text"] = "FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM\n"
 
     def opportunity_select(self, event):
         """
@@ -81,7 +81,7 @@ class menu:
         self.roverLabel["fg"] = "purple"
         self.rover = "Opportunity"
         self.roverLabel["text"] = self.rover
-        self.details["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES"
+        self.details["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES\n"
 
     def spirit_select(self, event):
         """
@@ -91,7 +91,7 @@ class menu:
         self.roverLabel["fg"] = "purple"
         self.rover = "Spirit"
         self.roverLabel["text"] = self.rover
-        self.details["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES"
+        self.details["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES\n"
 
     def begin_search(self, event):
         """
@@ -101,10 +101,7 @@ class menu:
         self.graph.delete(tkinter.ALL)
         self.blueBox = self.graph.create_rectangle(10, 10, 380, 250, outline="blue", width=1)
 
-        #This boundary box is used to track when the user is not examining a sol.
-        self.boundaryBox = self.graph.create_rectangle(5, 5, 390, 260, outline="black", width=10)
-
-        self.details["text"] = "[Scroll over a sol for details]"
+        self.details["text"] = "[Scroll over a sol for details]\n"
 
         sol = int(self.strSol.get())
 
@@ -130,35 +127,35 @@ class menu:
                                     + "\t" + str(sol + 4) + "\t" + str(sol + 5)
 
             #Creates five lines spanning the length of six selected sols.
-            solOneLine = self.graph.create_line(11, 250 - self.solOneData.numb_pictures() * 6.8, 84.8,
-                                                250 - self.solTwoData.numb_pictures() * 6.8, fill="green", width=2)
-            solTwoLine = self.graph.create_line(84.8, 250 - self.solTwoData.numb_pictures() * 6.8, 158.6,
-                                                250 - self.solThreeData.numb_pictures() * 6.8, fill="green", width=2)
-            solThreeLine = self.graph.create_line(158.6, 250 - self.solThreeData.numb_pictures() * 6.8, 232.4,
-                                                  250 - self.solFourData.numb_pictures() * 6.8, fill="green", width=2)
-            solFourLine = self.graph.create_line(232.4,250 - self.solFourData.numb_pictures() * 6.8, 306.2,
-                                                 250 - self.solFiveData.numb_pictures() * 6.8, fill="green", width=2)
-            solFiveLine = self.graph.create_line(306.2,250 - self.solFiveData.numb_pictures() * 6.8, 380,
-                                                 250 - self.solSixData.numb_pictures() * 6.8, fill="green", width=2)
+            solOneLine = self.graph.create_line(11, 250 - self.solOneData.numb_pictures() * 6.6, 84.8,
+                                                250 - self.solTwoData.numb_pictures() * 6.6, fill="green", width=2)
+            solTwoLine = self.graph.create_line(84.8, 250 - self.solTwoData.numb_pictures() * 6.6, 158.6,
+                                                250 - self.solThreeData.numb_pictures() * 6.6, fill="green", width=2)
+            solThreeLine = self.graph.create_line(158.6, 250 - self.solThreeData.numb_pictures() * 6.6, 232.4,
+                                                  250 - self.solFourData.numb_pictures() * 6.6, fill="green", width=2)
+            solFourLine = self.graph.create_line(232.4,250 - self.solFourData.numb_pictures() * 6.6, 306.2,
+                                                 250 - self.solFiveData.numb_pictures() * 6.6, fill="green", width=2)
+            solFiveLine = self.graph.create_line(306.2,250 - self.solFiveData.numb_pictures() * 6.6, 380,
+                                                 250 - self.solSixData.numb_pictures() * 6.6, fill="green", width=2)
 
             #Creates six dots at the corresponding selected sols' locations.
-            solOneDot = self.graph.create_oval(8, 247 - self.solOneData.numb_pictures() * 6.8, 14,
-                                               253 - self.solOneData.numb_pictures() * 6.8, fill="green",
+            solOneDot = self.graph.create_oval(8, 247 - self.solOneData.numb_pictures() * 6.6, 14,
+                                               253 - self.solOneData.numb_pictures() * 6.6, fill="green",
                                                activefill="blue", outline = "green", activewidth = 2)
-            solTwoDot = self.graph.create_oval(81.8, 247 - self.solTwoData.numb_pictures() * 6.8, 87.8,
-                                               253 - self.solTwoData.numb_pictures() * 6.8, fill="green",
+            solTwoDot = self.graph.create_oval(81.8, 247 - self.solTwoData.numb_pictures() * 6.6, 87.8,
+                                               253 - self.solTwoData.numb_pictures() * 6.6, fill="green",
                                                activefill="blue", outline="green", activewidth = 2)
-            solThreeDot = self.graph.create_oval(155.6, 247 - self.solThreeData.numb_pictures() * 6.8, 161.6,
-                                               253 - self.solThreeData.numb_pictures() * 6.8, fill="green",
+            solThreeDot = self.graph.create_oval(155.6, 247 - self.solThreeData.numb_pictures() * 6.6, 161.6,
+                                               253 - self.solThreeData.numb_pictures() * 6.6, fill="green",
                                                activefill="blue", outline="green", activewidth = 2)
-            solFourDot = self.graph.create_oval(229.4, 247 - self.solFourData.numb_pictures() * 6.8, 235.4,
-                                               253 - self.solFourData.numb_pictures() * 6.8, fill="green",
+            solFourDot = self.graph.create_oval(229.4, 247 - self.solFourData.numb_pictures() * 6.6, 235.4,
+                                               253 - self.solFourData.numb_pictures() * 6.6, fill="green",
                                                activefill="blue", outline="green", activewidth = 2)
-            solFiveDot = self.graph.create_oval(303.2, 247 - self.solFiveData.numb_pictures() * 6.8, 309.2,
-                                               253 - self.solFiveData.numb_pictures() * 6.8, fill="green",
+            solFiveDot = self.graph.create_oval(303.2, 247 - self.solFiveData.numb_pictures() * 6.6, 309.2,
+                                               253 - self.solFiveData.numb_pictures() * 6.6, fill="green",
                                                activefill="blue", outline="green", activewidth = 2)
-            solSixDot = self.graph.create_oval(377, 247 - self.solSixData.numb_pictures() * 6.8, 383,
-                                               253 - self.solSixData.numb_pictures() * 6.8, fill="green",
+            solSixDot = self.graph.create_oval(377, 247 - self.solSixData.numb_pictures() * 6.6, 383,
+                                               253 - self.solSixData.numb_pictures() * 6.6, fill="green",
                                                activefill="blue", outline="green", activewidth = 2)
 
             #Binds each sol's dot on the graph to the mouse entering the line. Performs data assign function to assign
@@ -169,8 +166,6 @@ class menu:
             self.graph.tag_bind(solFourDot, '<Enter>', self.data_assign)
             self.graph.tag_bind(solFiveDot, '<Enter>', self.data_assign)
             self.graph.tag_bind(solSixDot, '<Enter>', self.data_assign)
-
-            self.graph.tag_bind(self.boundaryBox, '<Leave>', self.data_assign)
 
     def data_assign(self, event):
         """
@@ -190,18 +185,14 @@ class menu:
             self.display_info(self.solFiveData)
         elif (event.x <= 386 and event.x > 374):
             self.display_info(self.solSixData)
-        else:
-            self.display_info(None)
 
     def display_info(self, solData):
         """
         Displays various details about the selected sol.
         """
 
-        if (solData == None):
-            self.details["text"] = "Back to showing camera types"
-        else:
-            self.details["text"] = "Earth Date: " + solData.earth_date()
+        self.details["text"] = "Earth Date: " + solData.earth_date() + ", Photos: " + str(solData.numb_pictures()) +\
+                               ",\n Camera Name: " + solData.camera_name()
 
     def __init__(self, master):
         """
@@ -306,7 +297,7 @@ class menu:
         corresponding to the appropriate rover.
         """
 
-        self.details = tkinter.Label(goFrame, text = "[Valid cameras for Rover]")
+        self.details = tkinter.Label(goFrame, text = "[Select a rover to see its valid cameras]\n")
         self.details.pack(side = tkinter.TOP)
 
         """

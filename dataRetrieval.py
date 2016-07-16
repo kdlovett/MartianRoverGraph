@@ -52,18 +52,26 @@ class retrieve():
         """
         Returns the number of pictures taken on the given sol by the given rover by the given camera.
         """
-        return len(self.data["photos"])
+        if (self.data == {"photos": {}}):
+            return 0
+        else:
+            return len(self.data["photos"])
 
     def earth_date(self):
         """
         Returns the Earth date of a given sol.
         """
 
-        return self.data["photos"][1]["earth_date"]
+        if (self.data == {"photos": {}}):
+            return "No data"
+        else:
+            return self.data["photos"][1]["earth_date"]
 
-    def print_all(self):
+    def camera_name(self):
         """
-        Prints the data corresponding to each photo.
+        Returns the full name of a camera used to take a picture.
         """
-        for lines in self.data["photos"]:
-            print(lines)
+        if (self.data == {"photos": {}}):
+            return "No data"
+        else:
+            return self.data["photos"][1]["camera"]["full_name"]
