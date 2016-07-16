@@ -5,7 +5,7 @@ Personal project. Shows short trends of Mars rovers in the form of a graph.
 Attribution:
 Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter.
 Also found the eff-bot Python documentation on more minute aspects of tkinter quite helpful.
-The json file is used to make use of the api key. (My brother showed me the best way
+The json file is used to make the http request to the NASA api. (My brother showed me the best way
 of going about that, by putting it in a separate file.)
 Thanks!
 Utilizes Nasa's open source "Mars Rover Photos" data.

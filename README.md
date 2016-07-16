@@ -9,7 +9,7 @@ Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the ba
 
 Also found the eff-bot Python documentation on more minute aspects of tkinter quite helpful.
 
-The json file is used to make use of the api key. (My brother showed me the best way
+The json file is used to make the http request to the NASA api. (My brother showed me the best way
 of going about that, by putting it in a separate file.)
 
 Thanks!
