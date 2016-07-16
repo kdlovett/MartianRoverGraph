@@ -54,6 +54,13 @@ class retrieve():
         """
         return len(self.data["photos"])
 
+    def earth_date(self):
+        """
+        Returns the Earth date of a given sol.
+        """
+
+        return self.data["photos"][1]["earth_date"]
+
     def print_all(self):
         """
         Prints the data corresponding to each photo.

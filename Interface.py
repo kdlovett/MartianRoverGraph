@@ -71,7 +71,7 @@ class menu:
         self.roverLabel["fg"] = "purple"
         self.rover = "Curiosity"
         self.roverLabel["text"] = self.rover
-        self.validCams["text"] = "FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM"
+        self.details["text"] = "FHAZ RHAZ MAST CHEMCAM MAHLI MARDI NAVCAM"
 
     def opportunity_select(self, event):
         """
@@ -81,7 +81,7 @@ class menu:
         self.roverLabel["fg"] = "purple"
         self.rover = "Opportunity"
         self.roverLabel["text"] = self.rover
-        self.validCams["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES"
+        self.details["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES"
 
     def spirit_select(self, event):
         """
@@ -91,7 +91,7 @@ class menu:
         self.roverLabel["fg"] = "purple"
         self.rover = "Spirit"
         self.roverLabel["text"] = self.rover
-        self.validCams["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES"
+        self.details["text"] = "FHAZ RHAZ NAVCAM PANCAM MINITES"
 
     def begin_search(self, event):
         """
@@ -99,7 +99,12 @@ class menu:
         """
 
         self.graph.delete(tkinter.ALL)
-        self.blueBox = self.graph.create_rectangle(10, 5, 380, 250, outline = "blue")
+        self.blueBox = self.graph.create_rectangle(10, 10, 380, 250, outline="blue", width=1)
+
+        #This boundary box is used to track when the user is not examining a sol.
+        self.boundaryBox = self.graph.create_rectangle(5, 5, 390, 260, outline="black", width=10)
+
+        self.details["text"] = "[Scroll over a sol for details]"
 
         sol = int(self.strSol.get())
 
@@ -121,7 +126,8 @@ class menu:
             self.solSixData = copy.deepcopy(solSixGet)
 
             #Creates x label and fills with appropriate sol numbers
-            self.xAxLabel["text"] = str(sol) + "\t" + str(sol + 1) + "\t" + str(sol + 2) + "\t " + str(sol + 3) + "\t" + str(sol + 4) + "\t" + str(sol + 5)
+            self.xAxLabel["text"] = str(sol) + "\t" + str(sol + 1) + "\t" + str(sol + 2) + "\t " + str(sol + 3) \
+                                    + "\t" + str(sol + 4) + "\t" + str(sol + 5)
 
             #Creates five lines spanning the length of six selected sols.
             solOneLine = self.graph.create_line(11, 250 - self.solOneData.numb_pictures() * 6.8, 84.8,
@@ -164,9 +170,11 @@ class menu:
             self.graph.tag_bind(solFiveDot, '<Enter>', self.data_assign)
             self.graph.tag_bind(solSixDot, '<Enter>', self.data_assign)
 
+            self.graph.tag_bind(self.boundaryBox, '<Leave>', self.data_assign)
+
     def data_assign(self, event):
         """
-        Upon entering a dot on the graph, checks if the mouse coordinates x value is less than or equal to the maximum
+        Upon entering a dot on the graph, checks if the mouse coordinates x value is within the vicinity of the
         x value of the oval representing the dot. If so, display the info for the corresponding sol's data.
         """
 
@@ -176,20 +184,24 @@ class menu:
             self.display_info(self.solTwoData)
         elif (event.x <= 164.6 and event.x > 152.6):
             self.display_info(self.solThreeData)
-        elif (event.x <= 234.4 and event.x > 230.4):
+        elif (event.x <= 238.4 and event.x > 226.4):
             self.display_info(self.solFourData)
-        elif (event.x <= 306.2 and event.x > 307.2):
+        elif (event.x <= 312.2 and event.x > 300.2):
             self.display_info(self.solFiveData)
-        elif (event.x <= 380 and event.x > 374):
+        elif (event.x <= 386 and event.x > 374):
             self.display_info(self.solSixData)
+        else:
+            self.display_info(None)
 
     def display_info(self, solData):
         """
-        Will continue working on here.
+        Displays various details about the selected sol.
         """
 
-        print(solData.numb_pictures())
-
+        if (solData == None):
+            self.details["text"] = "Back to showing camera types"
+        else:
+            self.details["text"] = "Earth Date: " + solData.earth_date()
 
     def __init__(self, master):
         """
@@ -225,7 +237,7 @@ class menu:
         """
         self.graph = tkinter.Canvas(graphFrame, width = 400, height = 270)
         self.graph.pack()
-        self.blueBox = self.graph.create_rectangle(10, 5, 380, 250, outline = "blue")
+        self.blueBox = self.graph.create_rectangle(10, 10, 380, 250, outline = "blue")
 
         self.xAxLabel = tkinter.Label(graphFrame, text = "Sol ")
         self.xAxLabel.pack(side = tkinter.BOTTOM, anchor = tkinter.W)
@@ -294,8 +306,8 @@ class menu:
         corresponding to the appropriate rover.
         """
 
-        self.validCams = tkinter.Label(goFrame, text = "[Valid cameras for Rover]")
-        self.validCams.pack(side = tkinter.TOP)
+        self.details = tkinter.Label(goFrame, text = "[Valid cameras for Rover]")
+        self.details.pack(side = tkinter.TOP)
 
         """
         Forms the "go button" to start a search. Binds it to the left mouse button and the begin_search function.
