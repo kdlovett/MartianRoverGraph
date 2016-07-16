@@ -1,6 +1,6 @@
 __author__ = 'keithlovett'
 """
-Personal project. Displays some basic information about pictures taken by the Mars rovers.
+Personal project. Shows short trends of Mars rovers in the form of a graph.
 
 Attribution:
 Bucky Robert "thenewboston"'s Youtube tutorials were helpful for learning the basics behind tkinter.
@@ -52,6 +52,7 @@ class retrieve():
         """
         Returns the number of pictures taken on the given sol by the given rover by the given camera.
         """
+
         if (self.data == {"photos": {}}):
             return 0
         else:
@@ -71,6 +72,7 @@ class retrieve():
         """
         Returns the full name of a camera used to take a picture.
         """
+
         if (self.data == {"photos": {}}):
             return "No data"
         else:

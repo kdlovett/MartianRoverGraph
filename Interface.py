@@ -1,6 +1,6 @@
 __author__ = 'keithlovett'
 """
-Personal project. Displays some basic information about pictures taken by the Mars rovers.
+Personal project. Shows short trends of Mars rovers in the form of a graph.
 
 Good test parameters:
 Sol 580, Curiosity, FHAZ
@@ -41,7 +41,7 @@ class menu:
     def print_cam(self, event):
         """
         Prints the current camera. If the rover is curiosity, and if there is an applicable camera currently entered,
-        turn green. Else turn red. Else if there is an applicable camera currently entered for another rover, turn red.
+        turn green. Else check if the camera is valid for the remaining two rovers.
         """
 
         camera = str(self.strCam.get())
@@ -188,7 +188,7 @@ class menu:
 
     def display_info(self, solData):
         """
-        Displays various details about the selected sol.
+        Displays various details about the selected sol for closer analysis.
         """
 
         self.details["text"] = "Earth Date: " + solData.earth_date() + ", Photos: " + str(solData.numb_pictures()) +\
@@ -236,7 +236,6 @@ class menu:
         """
         Forms the entry box and label for sol
         """
-
         solEntry = tkinter.Entry(topFrame)
         solEntry.pack(side = tkinter.RIGHT)
 
@@ -254,7 +253,6 @@ class menu:
         """
         Forms label and buttons for rover, and binds the buttons to left mouse click with the correct functions
         """
-
         self.roverLabel = tkinter.Label(middleFrame, text = "Click a rover to examine:")
         self.roverLabel.pack(side = tkinter.TOP)
 
@@ -275,7 +273,6 @@ class menu:
         """
         Forms the entry box and label for camera
         """
-
         self.strCam = ""
 
         camEntry = tkinter.Entry(bottomFrame)
@@ -296,14 +293,12 @@ class menu:
         Forms label for cameras that are valid for each rover. These are then updated in the selection functions
         corresponding to the appropriate rover.
         """
-
         self.details = tkinter.Label(goFrame, text = "[Select a rover to see its valid cameras]\n")
         self.details.pack(side = tkinter.TOP)
 
         """
         Forms the "go button" to start a search. Binds it to the left mouse button and the begin_search function.
         """
-
         goButton = tkinter.Button(goFrame, text = "Search", fg = "green")
         goButton.pack(side = tkinter.BOTTOM, anchor = tkinter.S)
         goButton.bind('<Button-1>', self.begin_search)
@@ -311,7 +306,6 @@ class menu:
         """
         Creates the y axis label.
         """
-
         yAxLabel = tkinter.Label(yAxisFrame, text = "Images\n\n\n\n30\n\n25\n\n20\n\n15\n\n10\n\n5\n\n0")
         yAxLabel.pack(side = tkinter.LEFT, padx = 10)
 
